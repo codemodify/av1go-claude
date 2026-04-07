@@ -1,0 +1,11 @@
+*.ppm
+*.y4m
+*.yuv
+*.mp4
+
+.claude/
+testvideo/
+testdata/
+testvideo-bad/
+dav1d/
+
