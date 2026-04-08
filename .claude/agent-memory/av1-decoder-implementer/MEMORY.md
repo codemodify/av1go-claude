@@ -1,0 +1,40 @@
+# Memory Index
+
+- [project_overview.md](project_overview.md) - Pure Go AV1 codec project, module av1go, Go 1.26.1, no external deps
+- [feedback_no_planning.md](feedback_no_planning.md) - User prefers direct agent execution over planning phases
+- [project_inter_bugs.md](project_inter_bugs.md) - I420 edge flags + CDEF boundary fixes, F0 PERFECT on Sintel/CityHall/spbtv
+- [project_sintel1080_fix.md](project_sintel1080_fix.md) - Boundary block early-return bug: blocks beyond FrameHeight must still parse bitstream
+- [project_cityhall_debug.md](project_cityhall_debug.md) - CityHall inter 1.65M diffs traced to deblock filter bug on keyframe reference
+- [project_lossless_fixes.md](project_lossless_fixes.md) - Lossless mode: CFL allowed check, txType override, stride padding fixes
+- [project_cityhall_skipmode_fix.md](project_cityhall_skipmode_fix.md) - skip_mode blocks must not read subpel filter; show_existing_frame for OBU_FRAME_HEADER
+- [project_obmc_cdf_reset_fix.md](project_obmc_cdf_reset_fix.md) - OBMC CDF used resetMulti instead of resetBool; fixed CityHall/BeachDrone inter frames
+- [project_gm_fix.md](project_gm_fix.md) - Global motion parsing rewrite: param order, absBits, precDiff, inverse_recenter + test video re-encode
+- [project_cfl_boundary_fix.md](project_cfl_boundary_fix.md) - CFL AC luma reads must use buffer bounds, not frame bounds; fixes Sintel chroma diffs
+- [project_deblock_sub8x8_fix.md](project_deblock_sub8x8_fix.md) - Deblock MI rows + sub-8x8 chroma neighbor fix → ALL 9 videos ALL PERFECT
+- [project_chroma_deblock_investigation.md](project_chroma_deblock_investigation.md) - Chroma deblock level cache fix: 20/22 videos PERFECT, remaining 1080 2MB/5MB are separate bugs
+- [project_1080_remaining_bugs.md](project_1080_remaining_bugs.md) - 2MB/5MB 1080p bugs: deblock level at bottom edge + residual error at y=632
+- [project_cfl_buffer_fix.md](project_cfl_buffer_fix.md) - CFL buffer fix: extraY 8->128, fixes 5MB; 21/22 ALL PERFECT, 2MB has separate MC/transform bug
+- [project_2mb_cdef_investigation.md](project_2mb_cdef_investigation.md) - 2MB CDEF rounding edge case at deferred row boundary; MC/transform/deblock all verified correct
+- [project_2mb_root_cause.md](project_2mb_root_cause.md) - 2MB real bug: reconstruction error at SB row 5 frame 5 tile(1,0), NOT CDEF boundary
+- [project_2mb_final_fix.md](project_2mb_final_fix.md) - hasMatchingRef top-right guard: max(bW,bH)<32 missing, 22/22 ALL PERFECT
+- [project_beachdrone_root_cause.md](project_beachdrone_root_cause.md) - BeachDrone OH=24 globalmv ctx diverges: findMVStack/temporal MV projection bug
+- [project_getglobalmv_fix.md](project_getglobalmv_fix.md) - getGlobalMV >>3 vs >>13 shift + missing ROTZOOM projection; fixes BeachDrone frame 17+
+- [project_beachdrone_coeff_bug.md](project_beachdrone_coeff_bug.md) - BeachDrone 18/50: coefficient decoding error in OH=24 from perfect refs, cascades to frames 17+
+- [project_gmv_compound_fix.md](project_gmv_compound_fix.md) - Compound GLOBALMV_GLOBALMV must use warp_affine prep; BeachDrone 49/50 PERFECT
+- [project_beachdrone_f49_analysis.md](project_beachdrone_f49_analysis.md) - BeachDrone F49: CDF diverges in OH=56 SB(32,160), intra-in-inter context bug
+- [project_beachdrone_f49_deep.md](project_beachdrone_f49_deep.md) - BeachDrone F49 deep: MSAC matches, MV stack cascading from temporal projection in LoadTMVs
+- [project_intrabc_impl.md](project_intrabc_impl.md) - IntraBC impl + hidden frame fix + show_existing_frame keyframe refresh
+- [project_loadtmvs_runlength_fix.md](project_loadtmvs_runlength_fix.md) - LoadTMVs run-length optimization fix, BeachDrone 49/55 PERFECT
+- [project_beachdrone_cdf_drift.md](project_beachdrone_cdf_drift.md) - BeachDrone F49 remaining: CDF drift in OH=56, partition diverges at (40,172)
+- [project_ibc_bilinear_fix.md](project_ibc_bilinear_fix.md) - IBC chroma needs bilinear interp for sub-pixel MVs in 4:2:0; Sintel_10MB 110/110 PERFECT
+- [project_beachdrone_f49_tmv.md](project_beachdrone_f49_tmv.md) - F49 traced: OH=64 PERFECT, OH=56 first diff at (704,128); ref2ref abs fix applied, root cause open
+- [feedback_linter_corruption.md](feedback_linter_corruption.md) - Linter corrupts source files: intra.go Z2 filter, decoder.go traces, inter_block.go dbg vars
+- [project_2mb_z2_upsample.md](project_2mb_z2_upsample.md) - 2MB IBC F95: z2 upsampled above ref off by 2 vs dav1d; fixing globally regresses
+- [project_cityhall_1080_preexisting.md](project_cityhall_1080_preexisting.md) - CityHall 1080p lossy 313K diffs NOT a regression, was never PERFECT, suspected CDF drift
+- [project_partctx_lr_fix.md](project_partctx_lr_fix.md) - T-split partition context table + LR alloc round-half-up; BBB/BeachDrone CDF drift remains
+- [project_bbb_bd_mv_bug.md](project_bbb_bd_mv_bug.md) - MV differs by (1,1) for NEARMV at MI(14,210) near frame edge, root cause of BBB/BD drift
+- [project_gmv_substitution_fix.md](project_gmv_substitution_fix.md) - GLOBALMV substitution in add_spatial_candidate for ROTZOOM/AFFINE refs; BBB 132/132 PERFECT
+- [project_bbb_warp_investigation.md](project_bbb_warp_investigation.md) - BBB 143/160: hasMatchingRef correct, deriveWarpMV has separate bug, root cause open
+- [project_subexp_fix.md](project_subexp_fix.md) - decodeSignedSubexpWithRef wrong branch formulas; BBB 160/160 PERFECT
+- [project_ibc_partctx_fix.md](project_ibc_partctx_fix.md) - IntraBC missing partition context update; BBB lossless KF F414-425 fixed
+- [project_bbb_f426_cdf_drift.md](project_bbb_f426_cdf_drift.md) - MV CDF divergence at F426: initial CDFs match, first NEWMV read diverges

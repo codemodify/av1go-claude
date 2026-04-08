@@ -3041,7 +3041,6 @@ func (td *TileDecoder) decodeTxBlock(bc *BoolReader, txSz TxSize, planeType, pla
 
 	DequantSeparate(coeffs, fullSize, qIndexDC, qIndexAC, isLossless, txSz)
 
-
 	// --- Inverse transform ---
 	// In lossless mode (4x4 only), use WHT (Walsh-Hadamard Transform).
 	// Otherwise use the standard 2D inverse transform.
