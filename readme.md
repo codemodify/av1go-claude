@@ -13,7 +13,7 @@
 
 # timeline
 - started on basic plan and after a week I switched to the Max plan
-- as of today - 2026 March 08 - total time it took to implement pure Go version of the AV1 decoder was 3 weeks of 24/7 Claude work
+- as of today - 2026 April 08 - total time it took to implement pure Go version of the AV1 decoder was 3 weeks of 24/7 Claude work
 
 # key moments
 - check `claude.md` + `.claude` folder for claude stuff, especially the `.claude/agents/*.md` files
